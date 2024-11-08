@@ -1,0 +1,24 @@
+def gomb_megnyomas(karakter):
+    global jelenlegi_bemenet  # A global kulcsszóval biztosítjuk, hogy a függvény hozzáférjen és módosítsa a `jelenlegi_bemenet` változót.
+    
+    # Ha a gomb megnyomott karaktere számjegy vagy műveleti jel (+, -, *, /), akkor hozzáadjuk az aktuális bemenethez
+    if karakter.isdigit() or karakter in "+-*/":
+        jelenlegi_bemenet += karakter  # Az aktuális bemenethez adjuk a karaktert (számot vagy műveleti jelet).
+        eredmeny_valtozo.set(jelenlegi_bemenet)  # Frissítjük a kijelzőt az aktuális bemenettel.
+    
+    # Ha a megnyomott gomb "Törlés", akkor töröljük az összes eddigi bemenetet és visszaállítjuk a kijelzőt
+    elif karakter == "Törlés":
+        jelenlegi_bemenet = ""  # A `jelenlegi_bemenet` változót üres karakterláncra állítjuk vissza.
+        eredmeny_valtozo.set("0")  # A kijelzőn az alapérték "0"-t mutatjuk.
+    
+    # Ha a megnyomott gomb "=", akkor megpróbáljuk kiszámolni az aktuális bemenet eredményét
+    elif karakter == "=":
+        try:
+            eredmeny = eval(jelenlegi_bemenet)  # Az `eval` függvénnyel kiszámoljuk a kifejezés eredményét.
+            eredmeny_valtozo.set(eredmeny)  # A kijelzőn megjelenítjük a számítás eredményét.
+            jelenlegi_bemenet = str(eredmeny)  # Az eredményt elmentjük új bemenetként, hogy további műveletekhez lehessen használni.
+        
+        # Ha hiba történik (pl. helytelen kifejezés), akkor hibát jelez a kijelzőn és törli a bemenetet
+        except Exception:
+            eredmeny_valtozo.set("Hiba")  # A kijelzőn "Hiba" üzenet jelenik meg.
+            jelenlegi_bemenet = ""  # Az aktuális bemenetet töröljük, hogy új számítás indítható legyen.
