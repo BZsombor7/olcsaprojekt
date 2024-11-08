@@ -13,10 +13,10 @@ class Szamologep:
         self.jelenlegi_bemenet = ""
         
         gombok = [
-            ('7', 1, 0), ('8', 1, 1), ('9', 1, 2), ('/', 1, 3),
-            ('4', 2, 0), ('5', 2, 1), ('6', 2, 2), ('*', 2, 3),
-            ('1', 3, 0), ('2', 3, 1), ('3', 3, 2), ('-', 3, 3),
-            ('0', 4, 0), ('Törlés', 4, 1), ('=', 4, 2), ('+', 4, 3)
+            ('1', 1, 0), ('2', 1, 1), ('3', 1, 2), ('Clear', 1, 3),
+            ('4', 2, 0), ('5', 2, 1), ('6', 2, 2), ('+', 2, 3),
+            ('7', 3, 0), ('8', 3, 1), ('9', 3, 2), ('-', 3, 3),
+            ('=', 4, 0), ('0', 4, 1), ('/', 4, 2), ('*', 4, 3)
         ]
         
         for (szoveg, sor, oszlop) in gombok:
@@ -32,7 +32,7 @@ class Szamologep:
         if karakter.isdigit() or karakter in "+-*/":
             self.jelenlegi_bemenet += karakter
             self.eredmeny_valtozo.set(self.jelenlegi_bemenet)
-        elif karakter == "Törlés":
+        elif karakter == "Clear":
             self.jelenlegi_bemenet = ""
             self.eredmeny_valtozo.set("0")
         elif karakter == "=":
